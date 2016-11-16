@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,18 +14,9 @@ import com.best.android.loler.R;
 import com.best.android.loler.adapter.MainViewPagerAdapter;
 import com.best.android.loler.config.NetConfig;
 import com.best.android.loler.dao.AccountDao;
-import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.Account;
 import com.best.android.loler.util.FileUtil;
-
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class MainActivity extends LoLBaseActivity {
 
