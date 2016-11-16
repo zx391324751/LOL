@@ -10,10 +10,9 @@ import android.widget.Toast;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.GroupListAdapter;
-import com.best.android.loler.httpService.BaseHttpService;
-import com.best.android.loler.httpService.GetRoomGroupService;
+import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.GetRoomGroupService;
 import com.best.android.loler.model.GroupInfo;
-import com.douyu.lib.xdanmuku.x.JniDanmu;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONException;

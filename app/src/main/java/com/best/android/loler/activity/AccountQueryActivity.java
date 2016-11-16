@@ -3,7 +3,6 @@ package com.best.android.loler.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDialog;
 import android.util.DisplayMetrics;
@@ -22,19 +21,17 @@ import android.widget.ViewFlipper;
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.LOLServerAdapter;
 import com.best.android.loler.config.NetConfig;
-import com.best.android.loler.httpService.BaseHttpService;
-import com.best.android.loler.httpService.GetLOLServerListService;
-import com.best.android.loler.httpService.QueryAccountService;
+import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.GetLOLServerListService;
+import com.best.android.loler.http.QueryAccountService;
 import com.best.android.loler.model.Account;
 import com.best.android.loler.model.LOLServerInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by BL06249 on 2015/12/16.

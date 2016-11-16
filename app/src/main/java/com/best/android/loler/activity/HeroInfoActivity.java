@@ -1,10 +1,7 @@
 package com.best.android.loler.activity;
 
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -21,9 +18,9 @@ import android.widget.TextView;
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.ListviewCzAdapter;
 import com.best.android.loler.config.NetConfig;
-import com.best.android.loler.httpService.BaseHttpService;
-import com.best.android.loler.httpService.QueryHeroCzService;
-import com.best.android.loler.httpService.QueryHeroDetailService;
+import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.QueryHeroCzService;
+import com.best.android.loler.http.QueryHeroDetailService;
 import com.best.android.loler.manager.ImageLoadManager;
 import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.HeroInfo;

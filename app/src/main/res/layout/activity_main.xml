@@ -10,49 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/toolbar"
-            android:background="@color/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:layout_width="fill_parent"
-            android:layout_height="56dp" >
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
-                <ImageView
-                    android:id="@+id/activity_main_iv_left_menu"
-                    android:padding="6dp"
-                    android:src="@drawable/icon_menu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:id="@+id/toolbar_tv_title"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    android:text="LOL"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:id="@+id/activity_main_btn_zhibo"
-                    android:textColor="@color/white"
-                    android:text="直播"
-                    android:textSize="14sp"
-                    android:background="@null"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.Toolbar>
+        <include
+            layout="@layout/toolbar"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/activity_main_viewpager"

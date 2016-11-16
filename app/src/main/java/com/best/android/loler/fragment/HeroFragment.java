@@ -3,21 +3,17 @@ package com.best.android.loler.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.AllHeroAdapter;
-import com.best.android.loler.adapter.FreeHeroAdapter;
 import com.best.android.loler.config.Constants;
-import com.best.android.loler.httpService.BaseHttpService;
-import com.best.android.loler.httpService.QueryHeroService;
+import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.QueryHeroService;
 import com.best.android.loler.model.HeroInfo;
 import com.best.android.loler.util.ToastUtil;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -28,8 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by BL06249 on 2015/11/23.

@@ -1,4 +1,4 @@
-package com.best.android.loler.httpService;
+package com.best.android.loler.http;
 
 import android.content.Context;
 
@@ -10,26 +10,25 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import org.apache.http.Header;
 
 /**
- * Created by BL06249 on 2015/12/2.
+ * Created by BL06249 on 2016/1/13.
  */
-public class QueryVideoUrlService extends BaseHttpService {
+public class GetRoomGroupService extends BaseHttpService {
 
     private final int TIME_OUT = 60 * 1000;
 
     private Context context;
     private ResponseListener responseListener;
 
-    public QueryVideoUrlService(Context context){
+    public GetRoomGroupService(Context context){
         this.context = context;
     }
 
-    public void send(ResponseListener listener, Object object) {
+    public void send(ResponseListener listener) {
         this.responseListener = listener;
-        String vid = (String)object;
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         asyncHttpClient.setTimeout(TIME_OUT);
         RequestParams requestParams = new RequestParams();
-        asyncHttpClient.get(context, NetConfig.getVideoAddressUrl(vid), requestParams, responseHandler);
+        asyncHttpClient.get(context, NetConfig.DOUYU_ZHIBO_GROUP_URL, requestParams, responseHandler);
     }
 
     TextHttpResponseHandler responseHandler = new TextHttpResponseHandler() {

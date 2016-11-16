@@ -1,4 +1,4 @@
-package com.best.android.loler.httpService;
+package com.best.android.loler.http;
 
 /**
  * Created by BL06249 on 2015/11/23.

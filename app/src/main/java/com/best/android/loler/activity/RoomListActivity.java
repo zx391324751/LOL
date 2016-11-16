@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.RoomListAdapter;
-import com.best.android.loler.httpService.BaseHttpService;
-import com.best.android.loler.httpService.GetRoomListService;
+import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.GetRoomListService;
 import com.best.android.loler.model.GroupInfo;
 import com.best.android.loler.model.RoomInfo;
 import com.fasterxml.jackson.core.JsonParseException;

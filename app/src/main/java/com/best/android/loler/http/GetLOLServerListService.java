@@ -1,4 +1,4 @@
-package com.best.android.loler.httpService;
+package com.best.android.loler.http;
 
 import android.content.Context;
 
@@ -10,37 +10,37 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import org.apache.http.Header;
 
 /**
- * Created by BL06249 on 2016/1/7.
+ * Created by BL06249 on 2015/12/16.
  */
-public class QueryHeroCzService extends BaseHttpService {
+public class GetLOLServerListService extends BaseHttpService {
 
     private final int TIME_OUT = 60 * 1000;
 
     private Context context;
-    private ResponseListener listener;
+    private ResponseListener responseListener;
 
-    public QueryHeroCzService(Context context){
+    public GetLOLServerListService(Context context){
         this.context = context;
     }
 
     public void send(ResponseListener listener, Object object) {
-        this.listener = listener;
-        String heroName = (String)object;
+        this.responseListener = listener;
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         asyncHttpClient.setTimeout(TIME_OUT);
         RequestParams requestParams = new RequestParams();
-        asyncHttpClient.get(context, NetConfig.getLolHeroCzUrl(heroName), requestParams, responseHandler);
+        asyncHttpClient.get(context, NetConfig.GET_LOL_SERVER_LIST_URL, requestParams, responseHandler);
+
     }
 
     TextHttpResponseHandler responseHandler = new TextHttpResponseHandler() {
         @Override
         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-            listener.onFail(responseString);
+            responseListener.onFail(responseString);
         }
 
         @Override
         public void onSuccess(int statusCode, Header[] headers, String responseString) {
-            listener.onSuccess(responseString);
+            responseListener.onSuccess(responseString);
         }
 
         @Override

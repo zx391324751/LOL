@@ -1,52 +1,45 @@
-package com.best.android.loler.httpService;
+package com.best.android.loler.http;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 
-import com.best.android.loler.config.Constants;
 import com.best.android.loler.config.NetConfig;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+
 import org.apache.http.Header;
 
 /**
- * Created by BL06249 on 2015/11/26.
+ * Created by BL06249 on 2016/1/5.
  */
-public class QueryHeroService extends BaseHttpService {
+public class QueryHeroDetailService extends BaseHttpService {
 
     private final int TIME_OUT = 60 * 1000;
-
     private Context context;
-    private ResponseListener responseListener;
+    private ResponseListener listener;
 
-    private int type;
-
-    public QueryHeroService(Context context){
+    public QueryHeroDetailService(Context context){
         this.context = context;
     }
 
     public void send(ResponseListener listener, Object object) {
-        this.responseListener = listener;
-        this.type = (int)object;
+        this.listener = listener;
+        String heroEnName = (String)object;
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         asyncHttpClient.setTimeout(TIME_OUT);
         RequestParams requestParams = new RequestParams();
-        if(type == Constants.FREE_HERO)
-            asyncHttpClient.get(context, NetConfig.FREE_HERO_URL, requestParams, responseHandler);
-        else if(type == Constants.ALL_HERO)
-            asyncHttpClient.get(context, NetConfig.ALL_HERO_URL, requestParams, responseHandler);
+        asyncHttpClient.post(context, NetConfig.getHeroDetailInfoUrl(heroEnName),requestParams, responseHandler);
     }
 
     TextHttpResponseHandler responseHandler = new TextHttpResponseHandler() {
         @Override
         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-            responseListener.onFail(responseString);
+            listener.onFail(responseString);
         }
 
         @Override
         public void onSuccess(int statusCode, Header[] headers, String responseString) {
-            responseListener.onSuccess(responseString);
+            listener.onSuccess(responseString);
         }
 
         @Override

@@ -36,12 +36,10 @@ dependencies {
     compile project(':jnidanmu')
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.1.0'
-    //ormlite
+    //数据库ormlite
     compile 'com.j256.ormlite:ormlite-core:4.48'
     compile 'com.j256.ormlite:ormlite-android:4.48'
-    //async-http
-    compile 'com.loopj.android:android-async-http:1.4.7'
-    // jackson
+    // json解析框架jackson
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.3'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.3'
     //eventbus  https://github.com/greenrobot/EventBus
@@ -50,4 +48,13 @@ dependencies {
     compile 'com.android.support:percent:22.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.zhy:percent-support-extends:1.0.1'
+    //图片加载框架 glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.android.support:support-v4:22.1.0'
+    //网络请求框架Retrofit, 实际上是封装了okhttp
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    //async-http
+    compile 'com.loopj.android:android-async-http:1.4.7'
+    //rxjava，消息订阅框架
+    compile 'io.reactivex:rxjava:1.2.2'
 }

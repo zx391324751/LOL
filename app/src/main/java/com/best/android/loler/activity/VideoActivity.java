@@ -1,19 +1,11 @@
 package com.best.android.loler.activity;
 
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
@@ -21,9 +13,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -34,17 +24,12 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.best.android.loler.R;
-import com.best.android.loler.httpService.BaseHttpService;
-import com.best.android.loler.httpService.QueryVideoUrlService;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.QueryVideoUrlService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by BL06249 on 2015/12/1.

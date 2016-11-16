@@ -13,9 +13,8 @@ import android.widget.VideoView;
 
 import com.best.android.loler.LOLApplication;
 import com.best.android.loler.R;
-import com.best.android.loler.config.NetConfig;
-import com.best.android.loler.httpService.BaseHttpService;
-import com.best.android.loler.httpService.GetRoomDetailService;
+import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.GetRoomDetailService;
 import com.best.android.loler.model.DanmuServer;
 import com.best.android.loler.model.RoomInfo;
 import com.douyu.lib.xdanmuku.x.DanmuClient;

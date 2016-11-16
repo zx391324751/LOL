@@ -1,8 +1,7 @@
-package com.best.android.loler.httpService;
+package com.best.android.loler.http;
 
 import android.content.Context;
 
-import com.best.android.loler.config.Constants;
 import com.best.android.loler.config.NetConfig;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
@@ -11,37 +10,37 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import org.apache.http.Header;
 
 /**
- * Created by BL06249 on 2015/12/16.
+ * Created by BL06249 on 2016/1/7.
  */
-public class GetLOLServerListService extends BaseHttpService {
+public class QueryHeroCzService extends BaseHttpService {
 
     private final int TIME_OUT = 60 * 1000;
 
     private Context context;
-    private ResponseListener responseListener;
+    private ResponseListener listener;
 
-    public GetLOLServerListService(Context context){
+    public QueryHeroCzService(Context context){
         this.context = context;
     }
 
     public void send(ResponseListener listener, Object object) {
-        this.responseListener = listener;
+        this.listener = listener;
+        String heroName = (String)object;
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         asyncHttpClient.setTimeout(TIME_OUT);
         RequestParams requestParams = new RequestParams();
-        asyncHttpClient.get(context, NetConfig.GET_LOL_SERVER_LIST_URL, requestParams, responseHandler);
-
+        asyncHttpClient.get(context, NetConfig.getLolHeroCzUrl(heroName), requestParams, responseHandler);
     }
 
     TextHttpResponseHandler responseHandler = new TextHttpResponseHandler() {
         @Override
         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-            responseListener.onFail(responseString);
+            listener.onFail(responseString);
         }
 
         @Override
         public void onSuccess(int statusCode, Header[] headers, String responseString) {
-            responseListener.onSuccess(responseString);
+            listener.onSuccess(responseString);
         }
 
         @Override

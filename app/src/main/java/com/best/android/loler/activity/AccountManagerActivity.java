@@ -11,10 +11,9 @@ import android.widget.Toast;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.ListviewAccountAdapter;
-import com.best.android.loler.adapter.OnItemClickListener;
 import com.best.android.loler.dao.AccountDao;
-import com.best.android.loler.httpService.BaseHttpService;
-import com.best.android.loler.httpService.QueryAccountService;
+import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.QueryAccountService;
 import com.best.android.loler.model.Account;
 import com.best.android.loler.view.ScrollerLinearLayout;
 import com.fasterxml.jackson.core.JsonParseException;

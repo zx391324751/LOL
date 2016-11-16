@@ -1,4 +1,4 @@
-package com.best.android.loler.httpService;
+package com.best.android.loler.http;
 
 import android.content.Context;
 

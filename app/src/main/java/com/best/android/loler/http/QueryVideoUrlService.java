@@ -1,46 +1,35 @@
-package com.best.android.loler.httpService;
+package com.best.android.loler.http;
 
 import android.content.Context;
 
 import com.best.android.loler.config.NetConfig;
-import com.douyu.lib.xdanmuku.x.JniDanmu;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
 
-import java.net.URLEncoder;
-
 /**
- * Created by BL06249 on 2016/1/13.
+ * Created by BL06249 on 2015/12/2.
  */
-public class GetRoomDetailService extends BaseHttpService {
+public class QueryVideoUrlService extends BaseHttpService {
 
     private final int TIME_OUT = 60 * 1000;
 
     private Context context;
     private ResponseListener responseListener;
 
-    public GetRoomDetailService(Context context){
+    public QueryVideoUrlService(Context context){
         this.context = context;
     }
 
-    public void send(ResponseListener listener, long roomId) {
+    public void send(ResponseListener listener, Object object) {
         this.responseListener = listener;
+        String vid = (String)object;
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         asyncHttpClient.setTimeout(TIME_OUT);
         RequestParams requestParams = new RequestParams();
-        JniDanmu jniDanmu = new JniDanmu(context.getApplicationContext());
-        String time = String.valueOf(60L * (System.currentTimeMillis() / 1000L / 60L));
-        String roomStr = "room/"+ roomId +"?";
-        String str1[] = new String[]{"aid", "client_sys", "time"};
-        String str2[] = new String[]{URLEncoder.encode("android"), URLEncoder.encode("android"), URLEncoder.encode(time)};
-        String str3[] = new String[]{};
-        String str4[] = new String[]{};
-        String result = jniDanmu.makeUrl(context.getApplicationContext(), roomStr, str1, str2, str3, str4, 1);
-
-        asyncHttpClient.get(context, NetConfig.getRoomDetailInfoUrl(result), requestParams, responseHandler);
+        asyncHttpClient.get(context, NetConfig.getVideoAddressUrl(vid), requestParams, responseHandler);
     }
 
     TextHttpResponseHandler responseHandler = new TextHttpResponseHandler() {
@@ -58,5 +47,4 @@ public class GetRoomDetailService extends BaseHttpService {
         public void onProgress(long bytesWritten, long totalSize) {
         }
     };
-
 }

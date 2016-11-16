@@ -1,36 +1,34 @@
 package com.best.android.loler.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.TransitionDrawable;
-import android.os.Build;
-import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.MainViewPagerAdapter;
 import com.best.android.loler.config.NetConfig;
 import com.best.android.loler.dao.AccountDao;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.Account;
 import com.best.android.loler.util.FileUtil;
 
-public class MainActivity extends FragmentActivity {
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
+public class MainActivity extends LoLBaseActivity {
 
     private  DrawerLayout drawerLayout;
     private ViewPager viewPager;
@@ -43,24 +41,6 @@ public class MainActivity extends FragmentActivity {
     private TextView tvServerName;
     private TextView tvLevel;
     private TextView tvFightLevel;
-
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.activity_main_iv_left_menu:
-                    if(drawerLayout.isDrawerOpen(Gravity.LEFT))
-                        drawerLayout.closeDrawer(Gravity.LEFT);
-                    else
-                        drawerLayout.openDrawer(Gravity.LEFT);
-                    break;
-                case R.id.activity_main_btn_zhibo:
-                    Intent intent = new Intent(MainActivity.this, DouyuActivity.class);
-                    startActivity(intent);
-                    break;
-            }
-        }
-    };
 
     private View.OnClickListener leftMenuItemOnClickListener = new View.OnClickListener() {
         @Override
@@ -76,14 +56,37 @@ public class MainActivity extends FragmentActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView(Bundle savedInstanceState) {
         FileUtil.initAllFileDir();
         setContentView(R.layout.activity_main);
 
+//        test();
         initView();
         initData();
     }
+
+//    private void test(){
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://lolbox.duowan.com/")
+//                .build();
+//        LOLBoxApi.LOLServerListService service = retrofit.create(LOLBoxApi.LOLServerListService.class);
+//        Call<ResponseBody> call = service.getLOLServerListService();
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                try {
+//                    Log.d("Test", response.body().string());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                t.printStackTrace();
+//            }
+//        });
+//    }
 
     @Override
     protected void onResume() {
@@ -96,9 +99,9 @@ public class MainActivity extends FragmentActivity {
     private void initView() {
         viewPager = (ViewPager)findViewById(R.id.activity_main_viewpager);
         drawerLayout = (DrawerLayout)findViewById(R.id.activity_main_drawerlayout);
-        findViewById(R.id.activity_main_iv_left_menu).setOnClickListener(onClickListener);
+//        findViewById(R.id.iv_left).setOnClickListener(onClickListener);
         findViewById(R.id.left_menu_layout_account_manager).setOnClickListener(leftMenuItemOnClickListener);
-        findViewById(R.id.activity_main_btn_zhibo).setOnClickListener(onClickListener);
+//        findViewById(R.id.activity_main_btn_zhibo).setOnClickListener(onClickListener);
 
         ivPhoto = (ImageView)findViewById(R.id.left_menu_iv_photo);
         tvServerName = (TextView) findViewById(R.id.left_menu_tv_server_name);
@@ -164,4 +167,15 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    @Override
+    protected void onClickImageViewLeft() {
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT))
+            drawerLayout.closeDrawer(Gravity.LEFT);
+    }
+
+    @Override
+    protected void onClickBtnRight() {
+        Intent intent = new Intent(MainActivity.this, DouyuActivity.class);
+        startActivity(intent);
+    }
 }
