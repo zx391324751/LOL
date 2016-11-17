@@ -41,7 +41,12 @@ public class LOLBoxApi{
 
     public interface LOLVideoService{
         @GET("apiVideoesNormalDuowan.php")
-        Call<ResponseBody>getVideoList(@Query("tag")String heroName, @Query("p") int pageNum);
+        Call<ResponseBody>getVideoList(@Query("tag")String heroName
+                , @Query("p") int pageNum
+                , @Query("v") int v
+                , @Query("OSType") String type
+                , @Query("src") String src
+                , @Query("action") String action);
 
         @GET("apiVideoesNormalDuowan.php")
         Call<ResponseBody>getVideoInfo(@Query("vid")String vid);

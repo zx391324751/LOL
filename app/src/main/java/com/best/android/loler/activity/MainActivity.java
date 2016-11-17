@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -92,9 +91,7 @@ public class MainActivity extends LoLBaseActivity {
     private void initView() {
         viewPager = (ViewPager)findViewById(R.id.activity_main_viewpager);
         drawerLayout = (DrawerLayout)findViewById(R.id.activity_main_drawerlayout);
-//        findViewById(R.id.iv_left).setOnClickListener(onClickListener);
         findViewById(R.id.left_menu_layout_account_manager).setOnClickListener(leftMenuItemOnClickListener);
-//        findViewById(R.id.activity_main_btn_zhibo).setOnClickListener(onClickListener);
 
         ivPhoto = (ImageView)findViewById(R.id.left_menu_iv_photo);
         tvServerName = (TextView) findViewById(R.id.left_menu_tv_server_name);
@@ -109,7 +106,6 @@ public class MainActivity extends LoLBaseActivity {
         viewPager.addOnPageChangeListener(onPageChangeListener);
     }
 
-    //初始化帐号数据，每次onresume调用该方法
     private void initAccountData(){
         if(account != null) {
             ivPhoto.setImageBitmap(PhotoManager.getInstance().getBitmapFromMemCache(NetConfig.getLolAccountPhotoUrl(account.photoId)));

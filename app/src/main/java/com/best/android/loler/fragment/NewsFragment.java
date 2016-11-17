@@ -8,12 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.FreeHeroAdapter;
 import com.best.android.loler.adapter.HeroVideoAdapter;
 import com.best.android.loler.config.Constants;
 import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.http.QueryHeroService;
 import com.best.android.loler.http.QueryVideoListService;
 import com.best.android.loler.model.HeroInfo;
@@ -29,6 +31,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by BL06249 on 2015/11/23.
@@ -96,11 +104,58 @@ public class NewsFragment extends Fragment {
         heroVideoAdapter = new HeroVideoAdapter(getActivity(), videoList);
         rvVideo.setAdapter(heroVideoAdapter);
 
-        QueryHeroService queryHeroService = new QueryHeroService(getActivity());
-        queryHeroService.send(freeHeroServiceResponseListener, Constants.FREE_HERO);
+        queryFreeHero();
+        queryVideoList();
+    }
 
-        QueryVideoListService queryVideoListService = new QueryVideoListService(getActivity());
-        queryVideoListService.send(videoListServiceResponseListener, pageNum);
+    private void queryVideoList() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://box.dwstatic.com/")
+                .build();
+        LOLBoxApi.LOLVideoService service = retrofit.create(LOLBoxApi.LOLVideoService.class);
+        Call<ResponseBody> call = service.getVideoList("", pageNum, 140, "iOS9.1", "letv", "l");
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    initVideoListJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtil.showShortMsg(getActivity(), Constants.JSON_ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ToastUtil.showShortMsg(getActivity(), Constants.QUERY_ERROR);
+            }
+        });
+    }
+
+    private void queryFreeHero() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://lolbox.duowan.com/")
+                .build();
+        LOLBoxApi.LOLHeroService service = retrofit.create(LOLBoxApi.LOLHeroService.class);
+        Call<ResponseBody> call = service.getHeroList("free", 140, "Android");
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    initFreeHeroJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtil.showShortMsg(getActivity(), Constants.JSON_ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ToastUtil.showShortMsg(getActivity(), Constants.QUERY_ERROR);
+            }
+        });
     }
 
     RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
@@ -108,49 +163,12 @@ public class NewsFragment extends Fragment {
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             LinearLayoutManager manager = (LinearLayoutManager)recyclerView.getLayoutManager();
-            //获取最后一个完全显示的ItemPosition
             int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
             int totalItemCount = manager.getItemCount();
-            // 判断是否滚动到底部，并且是向右滚动
             if (lastVisibleItem == (totalItemCount -1)) {
                 pageNum ++;
-                QueryVideoListService queryVideoListService = new QueryVideoListService(getActivity());
-                queryVideoListService.send(videoListServiceResponseListener, pageNum);
+                queryVideoList();
             }
-        }
-    };
-
-    BaseHttpService.ResponseListener freeHeroServiceResponseListener = new BaseHttpService.ResponseListener() {
-        @Override
-        public void onProgress(int current, int total) {
-
-        }
-
-        @Override
-        public void onSuccess(String result) {
-            initFreeHeroJson(result);
-        }
-
-        @Override
-        public void onFail(String errorMsg) {
-            ToastUtil.showShortMsg(getActivity(), Constants.QUERY_ERROR);
-        }
-    };
-
-    BaseHttpService.ResponseListener videoListServiceResponseListener = new BaseHttpService.ResponseListener() {
-        @Override
-        public void onProgress(int current, int total) {
-
-        }
-
-        @Override
-        public void onSuccess(String result) {
-            initVideoListJson(result);
-        }
-
-        @Override
-        public void onFail(String errorMsg) {
-            ToastUtil.showShortMsg(getActivity(), Constants.QUERY_ERROR);
         }
     };
 
