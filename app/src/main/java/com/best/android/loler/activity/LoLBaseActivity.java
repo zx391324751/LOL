@@ -32,7 +32,7 @@ public abstract class LoLBaseActivity extends AppCompatActivity implements View.
     private Button btnRight;
 
     private String title, btnRightStr;
-    private int btnRightRes = -1;
+    private int btnRightRes = -1, ivLeftRes = -1;
 
     protected abstract void initView(Bundle savedInstanceState);
 
@@ -40,14 +40,23 @@ public abstract class LoLBaseActivity extends AppCompatActivity implements View.
         this.finish();
     }
 
-    protected void onClickBtnRight(){
+    protected void onClickBtnRight(){}
 
+    protected void setRightButtonStr(String btnRightStr){
+        this.btnRightStr = btnRightStr;
+    }
+
+    protected void setIvLeftRes(int ivLeftRes){
+        this.ivLeftRes = ivLeftRes;
+    }
+
+    protected void setBtnRightRes(int ivLeftRes){
+        this.ivLeftRes = ivLeftRes;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setStatusBarColor(this, ContextCompat.getColor(this, R.color.system_bar_color));
         setStatusBarColor(this, R.color.system_bar_color);
         initView(savedInstanceState);
         initToolbar();
@@ -90,11 +99,15 @@ public abstract class LoLBaseActivity extends AppCompatActivity implements View.
         }
         if(!TextUtils.isEmpty(btnRightStr)){
             btnRight.setVisibility(View.VISIBLE);
-//            if(btnRightRes != -1){
-//                btnRight.setBackgroundResource(0);
-//            }
+            btnRight.setText(btnRightStr);
         } else {
             btnRight.setVisibility(View.GONE);
+        }
+        if(ivLeftRes != -1){
+            ivLeft.setImageResource(ivLeftRes);
+        }
+        if(btnRightRes != -1){
+            btnRight.setBackgroundResource(btnRightRes);
         }
 
         ivLeft.setOnClickListener(this);
