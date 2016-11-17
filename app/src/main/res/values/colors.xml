@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="action_bar_color">#82a8cc</color>
+    <color name="video_player_top_bar_color">#44353f4f</color>
+    <color name="video_player_toast_bg_color">#cc353f4f</color>
+
+    <!--bar的颜色-->
+    <color name="system_bar_color">#416862</color>
+    <color name="task_select_color">#9cea91</color>
+
+    <!--文字的颜色-->
+    <color name="text_view_color">#4a4a4a</color>  <!--应用整个app textview的基本色调 大部分的textview用该颜色-->
+    <color name="text_view_light_color">#a4a4a4</color> <!-- 相对较浅的颜色 -->
+    <color name="version_text_color">#3CB976</color>  <!--版本信息文字的颜色-->
+    <color name="selected_text_view_color">#3CB976</color> <!--文字选中的颜色-->
+    <color name="hint_text_color">#CDCCCE</color>   <!--edittext的hint颜色-->
+    <color name="edit_text_color">#424242</color>  <!--edittext的text的颜色-->
+    <color name="pic_select_tip_color">#9b9b9b</color>
+
+    <!--按钮的颜色-->
+    <color name="login_btn_color">#3CB976</color>
+    <color name="upload_again_btn_color">#FF0000</color>
+
+    <!--其他少数颜色-->
+    <color name="line_color">#CDCCCE</color>
+    <color name="red_line_color">#ff0000</color>
+    <color name="check_tip_layout_bg_color">#FA6352</color>
+    <color name="take_photo_bg_color">#3d3d3d</color>
+
+    <!--基本的色调-->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="background_color">#F5F5F5</color> <!--大部分界面的背景色基调-->
+
+    <color name="popup_window_task_type_item_normal_color">#416862</color>
+    <color name="popup_window_task_type_item_press_color">#3cb976</color>
+
+    <!--带透明度的颜色-->
+    <color name="alpha_0_color">#00ffffff</color>
+    <color name="alpha_10_white">#09ffffff</color>
+
+
+    <!--其他-->
+    <color name="black_01">#f1353f4f</color>
+    <color name="black_02">#2f3849</color>
+
+    <!--新增颜色参数-->
+    <color name="colorPrimary">#1db41b</color>
+    <color name="colorPrimaryDark">#1f981c</color>
+    <color name="yellow">#ffc418</color>
+
+
+    <color name="black_m">#212121</color>
+
+    <color name="grey_01">#cccccc</color>
+    <color name="grey_02">#b9b9b9</color>
+    <color name="grey_03">#3d3d3d</color>
+    <color name="grey_04">#c4c4c4</color>
+    <color name="grey_05">#e9e9e9</color>
+    <color name="grey_07">#e6e6e6</color>
+    <color name="grey_08">#3c3c3c</color>
+    <color name="grey_09">#c1c1c1</color>
+    <color name="grey_10">#b5b5b5</color>
+
+    <color name="green_01">#32cc49</color>
+    <color name="green_02">#007700</color>
+    <color name="green_03">#34c549</color>
+
+    <color name="blue_01">#82b1ff</color>
+    <color name="blue_01_alpha">#7782b1ff</color>
+
+    <color name="red_01">#dd191d</color>
+    <color name="red_02">#cf0000</color>
+
+    <color name="orange">#f58220</color>
+
+    <color name="colorAccent">#E91E63</color>
+    <color name="colorOrange">#EF6C00</color>
+
+    <color name="green_white">#dcedc8</color>
+
+    <color name="grey_06">#666666</color>
+    <color name="grey_a5">#a5a5a5</color>
+    <color name="grey_a3">#a3a3a3</color>
+
+    <color name="grey_line">#E0E1E3</color>
+    <color name="grey_42">#424242</color>
+    <color name="grey_b4">#b4b4b4</color>
+
+    <color name="grey_ECF6ED">#ECF6ED</color>
+    <color name="grey_E0E1E3">#E0E1E3</color>
+
+    <color name="green_28881d">#28881d</color>
+    <color name="green_32cc49">#32cc49</color>
+    <color name="green_1db41b">#1db41b</color>
+    <color name="green_ecf6ed">#ecf6ed</color>
+
+    <color name="black_36353d">#36353d</color>
+    <color name="black_alpha">#B2000000</color>
+    <color name="grey_f2">#f2f2f2</color>
+    <color name="grey_c2">#c2c2c2</color>
+
+    <color name="shadow_cadccc">#cadccc</color>
+
+    //
+    <color name="login_bg">#3f51b5</color>
+    <color name="login_edit_hint_color">#00bcd4</color>
+    <color name="wave_color">#aa666666</color>
+
+    <color name="indicator_color">#5677fc</color>
+
+</resources>

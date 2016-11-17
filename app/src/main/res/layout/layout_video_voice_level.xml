@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:visibility="invisible"
+    android:id="@+id/layout_video_voice"
+    android:background="@color/video_player_toast_bg_color"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/video_voice_level_tv_percent"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:text="音量20%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

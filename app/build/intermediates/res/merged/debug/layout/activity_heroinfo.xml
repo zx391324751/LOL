@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:background="@color/blue_01"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/activity_heroinfo_iv_photo"
+                android:background="@drawable/annie_120x120"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+
+            <TextView
+                android:id="@+id/activity_heroinfo_tv_name"
+                android:text="安妮"
+                android:textSize="16sp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_heroinfo_tv_location"
+                android:text="位置:中单"
+                android:textSize="14sp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="11dp"
+                android:layout_toRightOf="@+id/activity_heroinfo_tv_name"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_heroinfo_tv_gold"
+                android:text="金币:6300"
+                android:textSize="14sp"
+                android:layout_marginLeft="100dp"
+                android:layout_alignBottom="@+id/activity_heroinfo_iv_photo"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_heroinfo_tv_tickets"
+                android:text="点券:4500"
+                android:textSize="14sp"
+                android:layout_marginLeft="180dp"
+                android:layout_alignBottom="@+id/activity_heroinfo_iv_photo"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <com.best.android.loler.view.SkillIndicatorLayout
+            android:id="@+id/activity_heroinfo_skill_indicator"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:background="@color/yellow"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/activity_heroinfo_iv_skill_B"
+                android:background="@drawable/no_photo_120"
+                android:layout_margin="6dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/activity_heroinfo_iv_skill_Q"
+                android:src="@drawable/no_photo_120"
+                android:layout_margin="6dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/activity_heroinfo_iv_skill_W"
+                android:src="@drawable/no_photo_120"
+                android:layout_margin="6dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/activity_heroinfo_iv_skill_E"
+                android:src="@drawable/no_photo_120"
+                android:layout_margin="6dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/activity_heroinfo_iv_skill_R"
+                android:src="@drawable/no_photo_120"
+                android:layout_margin="6dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+        </com.best.android.loler.view.SkillIndicatorLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/activity_heroinfo_tv_skill_name"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/activity_heroinfo_tv_skill_cooldown"
+                    android:textSize="13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_heroinfo_tv_skill_cast"
+                    android:textSize="13sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/activity_heroinfo_tv_skill_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/activity_heroinfo_layout_cz"
+            android:background="@color/blue_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/activity_heroinfo_tv_author"
+                android:textColor="@color/white"
+                android:text="推荐出装"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/activity_heroinfo_tv_time"
+                android:layout_toLeftOf="@+id/activity_heroinfo_iv_arrow"
+                android:textColor="@color/white"
+                android:text="上传时间"
+                android:layout_marginRight="6dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/activity_heroinfo_iv_arrow"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/icon_chevron_right_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/layout_equip"/>
+
+    </LinearLayout>
+
+</ScrollView>
+<!-- From: file:/D:/work/GithubWork/LOL/app/src/main/res/layout/activity_heroinfo.xml -->

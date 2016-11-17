@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adapter_item_video_layout"
+    android:padding="10dp"
+    android:layout_margin="6dp"
+    android:clickable="true"
+    android:background="@drawable/card_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/adapter_item_video_iv_pic"
+        android:layout_centerVertical="true"
+        android:background="@drawable/no_photo_120"
+        android:layout_marginRight="10dp"
+        android:scaleType="fitXY"
+        android:layout_width="140dp"
+        android:layout_height="80dp" />
+
+    <TextView
+        android:id="@+id/adapter_item_video_tv_title"
+        android:text="title"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/adapter_item_video_iv_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/adapter_item_video_tv_time"
+        android:layout_alignParentBottom="true"
+        android:text="time"
+        android:layout_toRightOf="@+id/adapter_item_video_iv_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

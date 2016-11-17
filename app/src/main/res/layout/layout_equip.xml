@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/layout_equipment_tv_pre_explain"
+        android:text="前期"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_pre_0"
+            android:background="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_pre_1"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_pre_2"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_pre_3"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_pre_4"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_pre_5"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/layout_equipment_tv_mid_explain"
+        android:text="中期"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_mid_0"
+            android:background="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_mid_1"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_mid_2"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_mid_3"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_mid_4"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_mid_5"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/layout_equipment_tv_end_explain"
+        android:text="后期"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_end_0"
+            android:background="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_end_1"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_end_2"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_end_3"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_end_4"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_end_5"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/layout_equipment_tv_nf_explain"
+        android:text="逆风出装"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_nf_0"
+            android:background="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_nf_1"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_nf_2"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_nf_3"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_nf_4"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <com.best.android.loler.view.SquareImageView
+            android:id="@+id/layout_equipment_nf_5"
+            android:src="@drawable/no_photo_120"
+            android:layout_margin="6dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>
