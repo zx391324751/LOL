@@ -51,7 +51,7 @@ dependencies {
     //图片加载框架 glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:22.1.0'
-    //网络请求框架Retrofit, 实际上是封装了okhttp
+    //网络请求框架Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     //async-http
     compile 'com.loopj.android:android-async-http:1.4.7'

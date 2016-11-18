@@ -17,10 +17,10 @@ import android.widget.TextView;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.ListviewCzAdapter;
+import com.best.android.loler.config.Constants;
 import com.best.android.loler.config.NetConfig;
 import com.best.android.loler.http.BaseHttpService;
-import com.best.android.loler.http.QueryHeroCzService;
-import com.best.android.loler.http.QueryHeroDetailService;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.manager.ImageLoadManager;
 import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.HeroInfo;
@@ -39,6 +39,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by BL06249 on 2015/12/2.
@@ -88,10 +94,58 @@ public class HeroInfoActivity extends AppCompatActivity {
         initSkillPhoto();
         initPopupWindow();
 
-        QueryHeroDetailService queryHeroDetailService = new QueryHeroDetailService(this);
-        queryHeroDetailService.send(heroDetailListener, heroInfo.enName);
-        QueryHeroCzService queryHeroCzService = new QueryHeroCzService(this);
-        queryHeroCzService.send(heroCzListener, heroInfo.enName);
+        queryHeroDetail(heroInfo.enName);
+        queryHeroCz(heroInfo.enName);
+    }
+
+    private void queryHeroCz(String enName) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_3)
+                .build();
+        LOLBoxApi.LOLHeroService service = retrofit.create(LOLBoxApi.LOLHeroService.class);
+        Call<ResponseBody> call = service.getHeroCZInfo(enName);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    parseCzInfoJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtil.showShortMsg(HeroInfoActivity.this, Constants.JSON_ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ToastUtil.showShortMsg(HeroInfoActivity.this, Constants.QUERY_ERROR);
+            }
+        });
+    }
+
+    private void queryHeroDetail(String enName) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_1)
+                .build();
+        LOLBoxApi.LOLHeroService service = retrofit.create(LOLBoxApi.LOLHeroService.class);
+        Call<ResponseBody>call = service.getHeroDetailInfo(enName);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    parseSkillJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtil.showShortMsg(HeroInfoActivity.this, Constants.JSON_ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ToastUtil.showShortMsg(HeroInfoActivity.this, Constants.QUERY_ERROR);
+            }
+        });
     }
 
     private void initView() {

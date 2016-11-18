@@ -52,33 +52,9 @@ public class MainActivity extends LoLBaseActivity {
         setRightButtonStr("直播");
         setIvLeftRes(R.drawable.icon_menu);
 
-//        test();
         initView();
         initData();
     }
-
-//    private void test(){
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://lolbox.duowan.com/")
-//                .build();
-//        LOLBoxApi.LOLServerListService service = retrofit.create(LOLBoxApi.LOLServerListService.class);
-//        Call<ResponseBody> call = service.getLOLServerListService();
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                try {
-//                    Log.d("Test", response.body().string());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                t.printStackTrace();
-//            }
-//        });
-//    }
 
     @Override
     protected void onResume() {

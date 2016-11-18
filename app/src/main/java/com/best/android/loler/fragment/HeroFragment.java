@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.AllHeroAdapter;
 import com.best.android.loler.config.Constants;
-import com.best.android.loler.http.BaseHttpService;
-import com.best.android.loler.http.QueryHeroService;
+import com.best.android.loler.config.NetConfig;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.model.HeroInfo;
 import com.best.android.loler.util.ToastUtil;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -24,6 +24,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by BL06249 on 2015/11/23.
@@ -69,27 +75,29 @@ public class HeroFragment extends Fragment {
     }
 
     private void queryAllHero() {
-        QueryHeroService queryHeroService = new QueryHeroService(getActivity());
-        queryHeroService.send(responseListener, Constants.ALL_HERO);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_1)
+                .build();
+        LOLBoxApi.LOLHeroService service = retrofit.create(LOLBoxApi.LOLHeroService.class);
+        Call<ResponseBody>call = service.getHeroList("all", 140, "Android");
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    initHeroJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtil.showShortMsg(getActivity(), Constants.JSON_ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ToastUtil.showShortMsg(getActivity(), Constants.QUERY_ERROR);
+            }
+        });
     }
-
-    BaseHttpService.ResponseListener responseListener = new BaseHttpService.ResponseListener() {
-
-        @Override
-        public void onProgress(int current, int total) {
-
-        }
-
-        @Override
-        public void onSuccess(String result) {
-            initHeroJson(result);
-        }
-
-        @Override
-        public void onFail(String errorMsg) {
-            ToastUtil.showShortMsg(getActivity(), Constants.QUERY_ERROR);
-        }
-    };
 
     private void initHeroJson(String result) {
         try {

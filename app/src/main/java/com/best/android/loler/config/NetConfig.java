@@ -7,6 +7,10 @@ import java.net.URLEncoder;
  */
 public class NetConfig {
 
+    public static final String LOLBOX_BASE_URL_1 = "http://lolbox.duowan.com/";
+    public static final String LOLBOX_BASE_URL_2 = "http://box.dwstatic.com/";
+    public static final String LOLBOX_BASE_URL_3 = "http://db.duowan.com/";
+
     //本周免费英雄
     public static final String FREE_HERO_URL = "http://lolbox.duowan.com/phone/apiHeroes.php?type=free&v=140&OSType=Android";
     //全部英雄

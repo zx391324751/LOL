@@ -11,10 +11,12 @@ import android.widget.Toast;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.ListviewAccountAdapter;
+import com.best.android.loler.config.Constants;
+import com.best.android.loler.config.NetConfig;
 import com.best.android.loler.dao.AccountDao;
-import com.best.android.loler.http.BaseHttpService;
-import com.best.android.loler.http.QueryAccountService;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.model.Account;
+import com.best.android.loler.util.ToastUtil;
 import com.best.android.loler.view.ScrollerLinearLayout;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -26,6 +28,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by BL06249 on 2015/12/16.
@@ -84,54 +92,65 @@ public class AccountManagerActivity extends AppCompatActivity {
     //更新每个帐号的信息
     private void updataAccount() {
         for(int i=0; i<listAccount.size(); i++){
-            QueryAccountService queryAccountService = new QueryAccountService(this);
-            queryAccountService.send(queryAccountListener, listAccount.get(i).accountServerId, listAccount.get(i).accountName);
+            queryAccount(listAccount.get(i).accountServerId, listAccount.get(i).accountName);
         }
     }
 
-    BaseHttpService.ResponseListener queryAccountListener = new BaseHttpService.ResponseListener() {
-        @Override
-        public void onProgress(int current, int total) {
+    private void queryAccount(String sn, String name){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_1)
+                .build();
+        LOLBoxApi.LOLPlayerInfoService service = retrofit.create(LOLBoxApi.LOLPlayerInfoService.class);
+        Call<ResponseBody> call = service.getPlayerInfo("getPlayersInfo", sn, name);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    initAccountJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtil.showShortMsg(AccountManagerActivity.this, Constants.JSON_ERROR);
+                }
+            }
 
-        }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ToastUtil.showShortMsg(AccountManagerActivity.this, Constants.QUERY_ERROR);
+            }
+        });
+    }
 
-        @Override
-        public void onSuccess(String result) {
-            try {
-                JSONObject jsonObject = new JSONObject(result);
-                for(int i=0; i<listAccount.size(); i++){
-                    if(jsonObject.has(listAccount.get(i).accountName)){
-                        String accountInfo = jsonObject.getString(listAccount.get(i).accountName);
-                        ObjectMapper objectMapper = new ObjectMapper();
-                        Account account = objectMapper.readValue(accountInfo, Account.class);
-                        //当匹配到用户名和大区名的时候  更新数据库
-                        if(account.accountServerId.equals(listAccount.get(i).accountServerId)
-                                && account.accountName.equals(listAccount.get(i).accountName)){
-                            listAccount.get(i).accountLevel = account.accountLevel;
-                            listAccount.get(i).fightLevel = account.fightLevel;
-                            listAccount.get(i).tierDesc = account.tierDesc;
-                            listAccount.get(i).photoId = account.photoId;
-                            AccountDao accountDao = new AccountDao();
-                            accountDao.updateAccount(listAccount.get(i));
-                        }
+    private void initAccountJson(String result) {
+        try {
+            JSONObject jsonObject = new JSONObject(result);
+            for(int i=0; i<listAccount.size(); i++){
+                if(jsonObject.has(listAccount.get(i).accountName)){
+                    String accountInfo = jsonObject.getString(listAccount.get(i).accountName);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    Account account = objectMapper.readValue(accountInfo, Account.class);
+                    //当匹配到用户名和大区名的时候  更新数据库
+                    if(account.accountServerId.equals(listAccount.get(i).accountServerId)
+                            && account.accountName.equals(listAccount.get(i).accountName)){
+                        listAccount.get(i).accountLevel = account.accountLevel;
+                        listAccount.get(i).fightLevel = account.fightLevel;
+                        listAccount.get(i).tierDesc = account.tierDesc;
+                        listAccount.get(i).photoId = account.photoId;
+                        AccountDao accountDao = new AccountDao();
+                        accountDao.updateAccount(listAccount.get(i));
                     }
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (JsonParseException e) {
-                e.printStackTrace();
-            } catch (JsonMappingException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (JsonParseException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        @Override
-        public void onFail(String errorMsg) {
-
-        }
-    };
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

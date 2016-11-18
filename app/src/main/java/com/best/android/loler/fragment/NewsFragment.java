@@ -8,16 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.FreeHeroAdapter;
 import com.best.android.loler.adapter.HeroVideoAdapter;
 import com.best.android.loler.config.Constants;
-import com.best.android.loler.http.BaseHttpService;
+import com.best.android.loler.config.NetConfig;
 import com.best.android.loler.http.LOLBoxApi;
-import com.best.android.loler.http.QueryHeroService;
-import com.best.android.loler.http.QueryVideoListService;
 import com.best.android.loler.model.HeroInfo;
 import com.best.android.loler.model.VideoInfo;
 import com.best.android.loler.util.ToastUtil;
@@ -110,7 +107,7 @@ public class NewsFragment extends Fragment {
 
     private void queryVideoList() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://box.dwstatic.com/")
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_2)
                 .build();
         LOLBoxApi.LOLVideoService service = retrofit.create(LOLBoxApi.LOLVideoService.class);
         Call<ResponseBody> call = service.getVideoList("", pageNum, 140, "iOS9.1", "letv", "l");
@@ -135,7 +132,7 @@ public class NewsFragment extends Fragment {
 
     private void queryFreeHero() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://lolbox.duowan.com/")
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_1)
                 .build();
         LOLBoxApi.LOLHeroService service = retrofit.create(LOLBoxApi.LOLHeroService.class);
         Call<ResponseBody> call = service.getHeroList("free", 140, "Android");

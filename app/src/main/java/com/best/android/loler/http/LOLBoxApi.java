@@ -54,7 +54,9 @@ public class LOLBoxApi{
 
     public interface LOLPlayerInfoService{
         @GET("phone/apiCheckUser.php")
-        Call<ResponseBody>getPlayerInfo(@Query("serverName") String serverName, @Query("target") String userName);
+        Call<ResponseBody>getPlayerInfo(@Query("actions")String action
+                , @Query("serverName") String serverName
+                , @Query("target") String userName);
     }
 
     /**图片和网页相关的url**/

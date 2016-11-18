@@ -20,18 +20,24 @@ import android.widget.ViewFlipper;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.LOLServerAdapter;
+import com.best.android.loler.config.Constants;
 import com.best.android.loler.config.NetConfig;
-import com.best.android.loler.http.BaseHttpService;
-import com.best.android.loler.http.GetLOLServerListService;
-import com.best.android.loler.http.QueryAccountService;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.model.Account;
 import com.best.android.loler.model.LOLServerInfo;
+import com.best.android.loler.util.ToastUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by BL06249 on 2015/12/16.
@@ -74,12 +80,34 @@ public class AccountQueryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_query);
-
         selectPosition = 0;
-        GetLOLServerListService getLOLServerListService = new GetLOLServerListService(this);
-        getLOLServerListService.send(getLOLServerListener, null);
-
+        queryServerList();
         initView();
+    }
+
+    private void queryServerList() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_1)
+                .build();
+        LOLBoxApi.LOLServerListService service = retrofit.create(LOLBoxApi.LOLServerListService.class);
+        Call<ResponseBody> call = service.getLOLServerListService();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    initServerJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtil.showShortMsg(AccountQueryActivity.this, Constants.JSON_ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ToastUtil.showShortMsg(AccountQueryActivity.this, Constants.QUERY_ERROR);
+            }
+        });
     }
 
     private void initView() {
@@ -105,10 +133,33 @@ public class AccountQueryActivity extends AppCompatActivity {
             Toast.makeText(this, "请输入名称并且选择该名称所在的服务器", Toast.LENGTH_SHORT).show();
             return;
         }
+        queryAccount(listServer[selectPosition].sn, name);
 
-        QueryAccountService queryAccountService = new QueryAccountService(this);
-        queryAccountService.send(queryAccountListener, listServer[selectPosition].sn, name);
+    }
 
+    private void queryAccount(String sn, String name) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_1)
+                .build();
+        LOLBoxApi.LOLPlayerInfoService service = retrofit.create(LOLBoxApi.LOLPlayerInfoService.class);
+        Call<ResponseBody> call = service.getPlayerInfo("getPlayersInfo", sn, name);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String result = response.body().string();
+                    initAccountJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    ToastUtil.showShortMsg(AccountQueryActivity.this, Constants.JSON_ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ToastUtil.showShortMsg(AccountQueryActivity.this, Constants.QUERY_ERROR);
+            }
+        });
     }
 
     //点击确认
@@ -151,23 +202,6 @@ public class AccountQueryActivity extends AppCompatActivity {
         }
     }
 
-    private BaseHttpService.ResponseListener getLOLServerListener = new BaseHttpService.ResponseListener() {
-        @Override
-        public void onProgress(int current, int total) {
-
-        }
-
-        @Override
-        public void onSuccess(String result) {
-            initServerJson(result);
-        }
-
-        @Override
-        public void onFail(String errorMsg) {
-            Toast.makeText(AccountQueryActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
-        }
-    };
-
     private void initServerJson(String result) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -179,23 +213,6 @@ public class AccountQueryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    private BaseHttpService.ResponseListener queryAccountListener = new BaseHttpService.ResponseListener() {
-        @Override
-        public void onProgress(int current, int total) {
-
-        }
-
-        @Override
-        public void onSuccess(String result) {
-            initAccountJson(result);
-        }
-
-        @Override
-        public void onFail(String errorMsg) {
-            Toast.makeText(AccountQueryActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
-        }
-    };
 
     private void initAccountJson(String result) {
         String userName = etName.getText().toString();
