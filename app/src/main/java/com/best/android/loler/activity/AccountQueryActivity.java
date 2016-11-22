@@ -7,9 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDialog;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
@@ -228,16 +230,8 @@ public class AccountQueryActivity extends AppCompatActivity {
             result = jsonObject.getString(userName);
             Account accountSearch = objectMapper.readValue(result, Account.class);
             this.account = accountSearch;
-            webView.setWebViewClient(new WebViewClient(){
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    if(TextUtils.isEmpty(url)){
-                        view.loadUrl(url);
-                    }
-                    return true;
-                }
-            });
-            webView.loadUrl(LOLBoxApi.getLolUserInfoWebUrl(account.accountServerId, account.accountName));
+
+            setWebView();
             viewFlipper.showNext();
             btnConfirm.setVisibility(View.VISIBLE);
         } catch (IOException e) {
@@ -245,6 +239,35 @@ public class AccountQueryActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setWebView() {
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setAppCacheEnabled(true);
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setSupportZoom(false);
+        settings.setLoadWithOverviewMode(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if(!TextUtils.isEmpty(url)){
+                    view.loadUrl(url);
+                }
+                return true;
+            }
+        });
+        webView.loadUrl(LOLBoxApi.getLolUserInfoWebUrl(account.accountServerId, account.accountName));
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

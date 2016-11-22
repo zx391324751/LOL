@@ -24,12 +24,21 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.best.android.loler.R;
-import com.best.android.loler.http.BaseHttpService;
-import com.best.android.loler.http.QueryVideoUrlService;
+import com.best.android.loler.config.Constants;
+import com.best.android.loler.config.NetConfig;
+import com.best.android.loler.http.LOLBoxApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by BL06249 on 2015/12/1.
@@ -180,26 +189,31 @@ public class VideoActivity extends AppCompatActivity {
         String vName = getIntent().getStringExtra("vname");
         if(vName != null)
             tvTitle.setText(vName);
-        QueryVideoUrlService queryVideoUrlService = new QueryVideoUrlService(this);
-        queryVideoUrlService.send(responseListener, vid);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(NetConfig.LOLBOX_BASE_URL_2)
+                .build();
+        LOLBoxApi.LOLVideoService service = retrofit.create(LOLBoxApi.LOLVideoService.class);
+        Call<ResponseBody> call = service.getVideoInfo("f", vid);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String result = null;
+                try {
+                    result = response.body().string();
+                    initVideoAddressJson(result);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(VideoActivity.this, Constants.JSON_ERROR, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(VideoActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-
-    BaseHttpService.ResponseListener responseListener = new BaseHttpService.ResponseListener() {
-        @Override
-        public void onProgress(int current, int total) {
-
-        }
-
-        @Override
-        public void onSuccess(String result) {
-            initVideoAddressJson(result);
-        }
-
-        @Override
-        public void onFail(String errorMsg) {
-            Toast.makeText(VideoActivity.this, "服务器错误", Toast.LENGTH_SHORT).show();
-        }
-    };
 
     //解析视频地址
     private void initVideoAddressJson(String result) {

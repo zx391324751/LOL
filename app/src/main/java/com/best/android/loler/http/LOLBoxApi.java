@@ -50,7 +50,7 @@ public class LOLBoxApi{
                 , @Query("action") String action);
 
         @GET("apiVideoesNormalDuowan.php")
-        Call<ResponseBody>getVideoInfo(@Query("vid")String vid);
+        Call<ResponseBody>getVideoInfo(@Query("action")String action, @Query("vid")String vid);
     }
 
     public interface LOLPlayerInfoService{
