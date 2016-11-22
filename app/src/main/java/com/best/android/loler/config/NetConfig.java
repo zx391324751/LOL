@@ -42,9 +42,9 @@ public class NetConfig {
     public static final String LOL_ZB_PHOTO_URL = "http://img.lolbox.duowan.com/zb/";
 
 
-    public static String getHeroPhotoUrl(String heroName){
-        return HERO_PHOTO_URL+ heroName + "_120x120.jpg";
-    }
+//    public static String getHeroPhotoUrl(String heroName){
+//        return HERO_PHOTO_URL+ heroName + "_120x120.jpg";
+//    }
 
     public static String getVideoListUrl(String heroName, int pageNum){
         String url = HERO_VIDEO_URL + "action=l&v=140&OSType=iOS9.1&src=letv";
@@ -59,33 +59,33 @@ public class NetConfig {
         return QUERY_VIDEO_ADDRESS_URL + "&vid=" + vid;
     }
 
-    public static String getLoLUserInfoUrl(String serverName, String userName){
-        return LOL_USER_INFO_URL + "&serverName=" + serverName + "&target=" + userName;
-    }
+//    public static String getLoLUserInfoUrl(String serverName, String userName){
+//        return LOL_USER_INFO_URL + "&serverName=" + serverName + "&target=" + userName;
+//    }
+//
+//    public static String getLolUserInfoWebUrl(String serverName, String userName){
+//        return LOL_USER_INFO_WEB_URL + "&sn=" + serverName + "&pn=" + userName;
+//    }
 
-    public static String getLolUserInfoWebUrl(String serverName, String userName){
-        return LOL_USER_INFO_WEB_URL + "&sn=" + serverName + "&pn=" + userName;
-    }
+//    public static String getLolAccountPhotoUrl(int photoID){
+//        return LOL_ACCOUNT_PHOTO_URL + photoID + ".jpg";
+//    }
 
-    public static String getLolAccountPhotoUrl(int photoID){
-        return LOL_ACCOUNT_PHOTO_URL + photoID + ".jpg";
-    }
+//    public static String getSkillPhotoUrl(String skill){
+//        return LOL_HERO_SKILL_PHOTO_URL + skill + "_64x64.png?v=10&OSType=iOS7.0.3";
+//    }
 
-    public static String getSkillPhotoUrl(String skill){
-        return LOL_HERO_SKILL_PHOTO_URL + skill + "_64x64.png?v=10&OSType=iOS7.0.3";
-    }
+//    public static String getHeroDetailInfoUrl(String heroName){
+//        return LOL_HERO_DETAIL_INFO_URL + heroName;
+//    }
+//
+//    public static String getLolHeroCzUrl(String heroName){
+//        return LOL_HERO_CZ_URL + heroName;
+//    }
 
-    public static String getHeroDetailInfoUrl(String heroName){
-        return LOL_HERO_DETAIL_INFO_URL + heroName;
-    }
-
-    public static String getLolHeroCzUrl(String heroName){
-        return LOL_HERO_CZ_URL + heroName;
-    }
-
-    public static String getLolZbPhotoUrl(String id){
-        return LOL_ZB_PHOTO_URL + id + "_64x64.png";
-    }
+//    public static String getLolZbPhotoUrl(String id){
+//        return LOL_ZB_PHOTO_URL + id + "_64x64.png";
+//    }
 
 
     /************   斗鱼tv接口    **************/

@@ -17,6 +17,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.best.android.loler.R;
 import com.best.android.loler.config.NetConfig;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.HeroInfo;
 
@@ -48,7 +49,7 @@ public class FreeHeroAdapter extends RecyclerView.Adapter<FreeHeroAdapter.FreeHe
     public void onBindViewHolder(FreeHeroViewHolder holder, int position) {
         holder.tvName.setText(heroInfos[position].cnName);
 
-        String url = NetConfig.getHeroPhotoUrl(heroInfos[position].enName);
+        String url = LOLBoxApi.getHeroPhotoUrl(heroInfos[position].enName);
         Bitmap bitmap = PhotoManager.getInstance().getBitmapFromMemCache(url);
         if(bitmap == null)
             loadImage(holder, url);

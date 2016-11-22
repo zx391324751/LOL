@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.best.android.loler.R;
 import com.best.android.loler.adapter.MainViewPagerAdapter;
-import com.best.android.loler.config.NetConfig;
 import com.best.android.loler.dao.AccountDao;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.Account;
 import com.best.android.loler.util.FileUtil;
@@ -84,7 +84,7 @@ public class MainActivity extends LoLBaseActivity {
 
     private void initAccountData(){
         if(account != null) {
-            ivPhoto.setImageBitmap(PhotoManager.getInstance().getBitmapFromMemCache(NetConfig.getLolAccountPhotoUrl(account.photoId)));
+            ivPhoto.setImageBitmap(PhotoManager.getInstance().getBitmapFromMemCache(LOLBoxApi.getLolAccountPhotoUrl(account.photoId)));
             tvName.setText(account.accountName);
             tvServerName.setText(account.accountServerName);
             tvLevel.setText(account.tierDesc);

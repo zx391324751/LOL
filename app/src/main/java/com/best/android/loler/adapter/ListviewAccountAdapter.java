@@ -22,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.best.android.loler.R;
 import com.best.android.loler.config.NetConfig;
 import com.best.android.loler.dao.AccountDao;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.Account;
 import com.best.android.loler.view.CircleImageView;
@@ -121,7 +122,7 @@ public class ListviewAccountAdapter extends BaseAdapter {
             holder.ivCheck.setVisibility(View.INVISIBLE);
         }
 
-        String url = NetConfig.getLolAccountPhotoUrl(listAcount.get(position).photoId);
+        String url = LOLBoxApi.getLolAccountPhotoUrl(listAcount.get(position).photoId);
         Bitmap bitmap = PhotoManager.getInstance().getBitmapFromMemCache(url);
         if(bitmap == null)
             loadImage(holder, url);

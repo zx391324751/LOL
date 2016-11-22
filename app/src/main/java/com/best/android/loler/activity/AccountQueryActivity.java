@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDialog;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -226,7 +228,16 @@ public class AccountQueryActivity extends AppCompatActivity {
             result = jsonObject.getString(userName);
             Account accountSearch = objectMapper.readValue(result, Account.class);
             this.account = accountSearch;
-            webView.loadUrl(NetConfig.getLolUserInfoWebUrl(account.accountServerId, account.accountName));
+            webView.setWebViewClient(new WebViewClient(){
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    if(TextUtils.isEmpty(url)){
+                        view.loadUrl(url);
+                    }
+                    return true;
+                }
+            });
+            webView.loadUrl(LOLBoxApi.getLolUserInfoWebUrl(account.accountServerId, account.accountName));
             viewFlipper.showNext();
             btnConfirm.setVisibility(View.VISIBLE);
         } catch (IOException e) {

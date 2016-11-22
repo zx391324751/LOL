@@ -18,12 +18,9 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.best.android.loler.R;
 import com.best.android.loler.activity.HeroInfoActivity;
-import com.best.android.loler.activity.VideoActivity;
-import com.best.android.loler.config.NetConfig;
+import com.best.android.loler.http.LOLBoxApi;
 import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.HeroInfo;
-
-import java.util.List;
 
 /**
  * Created by BL06249 on 2015/12/2.
@@ -54,7 +51,7 @@ public class AllHeroAdapter extends RecyclerView.Adapter<AllHeroAdapter.HeroView
         price = price.substring(0, price.indexOf(","));
         holder.tvPrice.setText(price);
 
-        String url = NetConfig.getHeroPhotoUrl(heroInfos[position].enName);
+        String url = LOLBoxApi.getHeroPhotoUrl(heroInfos[position].enName);
         Bitmap bitmap = PhotoManager.getInstance().getBitmapFromMemCache(url);
         if(bitmap == null)
             loadImage(holder, url);

@@ -205,7 +205,7 @@ public class HeroInfoActivity extends AppCompatActivity {
         TextView tvName = (TextView)findViewById(R.id.activity_heroinfo_tv_name);
         tvName.setText(heroInfo.cnName);
         ImageView ivPhoto = (ImageView)findViewById(R.id.activity_heroinfo_iv_photo);
-        String url = NetConfig.getHeroPhotoUrl(heroInfo.enName);
+        String url = LOLBoxApi.getHeroPhotoUrl(heroInfo.enName);
         Bitmap bitmap = PhotoManager.getInstance().getBitmapFromMemCache(url);
         if(bitmap != null)
             ivPhoto.setImageBitmap(bitmap);
@@ -234,7 +234,7 @@ public class HeroInfoActivity extends AppCompatActivity {
             if(bitmap != null) {
                 ivSkill[i].setImageBitmap(bitmap);
             } else {
-                ImageLoadManager.loadImage(ivSkill[i], NetConfig.getSkillPhotoUrl(skill), false);
+                ImageLoadManager.loadImage(ivSkill[i], LOLBoxApi.getSkillPhotoUrl(skill), false);
             }
         }
     }
@@ -372,7 +372,7 @@ public class HeroInfoActivity extends AppCompatActivity {
                 if(i >= preZbUrl.length){
                     ivPreCz[i].setVisibility(View.INVISIBLE);
                 } else {
-                    ImageLoadManager.loadImage(ivPreCz[i], NetConfig.getLolZbPhotoUrl(preZbUrl[i]), false);
+                    ImageLoadManager.loadImage(ivPreCz[i], LOLBoxApi.getLolZbPhotoUrl(preZbUrl[i]), false);
                 }
             }
 
@@ -382,7 +382,7 @@ public class HeroInfoActivity extends AppCompatActivity {
                 if(i >= midZbUrl.length){
                     ivMidCz[i].setVisibility(View.INVISIBLE);
                 } else {
-                    ImageLoadManager.loadImage(ivMidCz[i], NetConfig.getLolZbPhotoUrl(midZbUrl[i]), false);
+                    ImageLoadManager.loadImage(ivMidCz[i], LOLBoxApi.getLolZbPhotoUrl(midZbUrl[i]), false);
                 }
             }
 
@@ -392,7 +392,7 @@ public class HeroInfoActivity extends AppCompatActivity {
                 if(i >= endZbUrl.length){
                     ivEndCz[i].setVisibility(View.INVISIBLE);
                 } else {
-                    ImageLoadManager.loadImage(ivEndCz[i], NetConfig.getLolZbPhotoUrl(endZbUrl[i]), false);
+                    ImageLoadManager.loadImage(ivEndCz[i], LOLBoxApi.getLolZbPhotoUrl(endZbUrl[i]), false);
                 }
             }
 
@@ -402,7 +402,7 @@ public class HeroInfoActivity extends AppCompatActivity {
                 if(i >= nfZbUrl.length){
                     ivNfCz[i].setVisibility(View.INVISIBLE);
                 } else {
-                    ImageLoadManager.loadImage(ivNfCz[i], NetConfig.getLolZbPhotoUrl(nfZbUrl[i]), false);
+                    ImageLoadManager.loadImage(ivNfCz[i], LOLBoxApi.getLolZbPhotoUrl(nfZbUrl[i]), false);
                 }
             }
         }

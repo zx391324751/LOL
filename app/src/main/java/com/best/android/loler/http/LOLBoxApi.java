@@ -15,12 +15,13 @@ public class LOLBoxApi{
     //英雄头像数据
     public static final String HERO_PHOTO_URL = "http://img.lolbox.duowan.com/champions/";
     //玩家信息WebView 地址
-    public static final String LOL_USER_INFO_WEB_URL = "http://zdl.mbox.duowan.com/phone/" +
-            "playerDetailNew.php?lolboxAction=toPlayerDetail";
+    public static final String LOL_USER_INFO_WEB_URL = "http://zdl.mbox.duowan.com/phone/playerDetailNewFB.php?";
     //玩家头像数据
     public static final String LOL_ACCOUNT_PHOTO_URL = "http://img.lolbox.duowan.com/profileIcon/profileIcon";
     //英雄技能图标
     public static final String LOL_HERO_SKILL_PHOTO_URL = "http://img.lolbox.duowan.com/abilities/";
+    //装备图片
+    public static final String LOL_ZB_PHOTO_URL = "http://img.lolbox.duowan.com/zb/";
 
     public interface LOLServerListService{
         @GET("phone/apiServers.php")
@@ -54,7 +55,7 @@ public class LOLBoxApi{
 
     public interface LOLPlayerInfoService{
         @GET("phone/apiCheckUser.php")
-        Call<ResponseBody>getPlayerInfo(@Query("actions")String action
+        Call<ResponseBody>getPlayerInfo(@Query("action")String action
                 , @Query("serverName") String serverName
                 , @Query("target") String userName);
     }
@@ -71,6 +72,9 @@ public class LOLBoxApi{
     }
     public static String getSkillPhotoUrl(String skill){
         return LOL_HERO_SKILL_PHOTO_URL + skill + "_64x64.png?v=10&OSType=iOS7.0.3";
+    }
+    public static String getLolZbPhotoUrl(String id){
+        return LOL_ZB_PHOTO_URL + id + "_64x64.png";
     }
 
 }
