@@ -68,6 +68,12 @@ public abstract class LoLBaseActivity extends AppCompatActivity{
         this.title = title;
     }
 
+    protected void setRightButtonVisibility(int visibility){
+        if(btnRight != null){
+            btnRight.setVisibility(visibility);
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

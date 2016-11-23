@@ -37,6 +37,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,47 +49,37 @@ import retrofit2.Retrofit;
 /**
  * Created by BL06249 on 2015/12/16.
  */
-public class AccountQueryActivity extends AppCompatActivity {
+public class AccountQueryActivity extends LoLBaseActivity {
 
-    private ViewFlipper viewFlipper;
-    private Button btnConfirm;
+    @BindView(R.id.activity_account_query_vf)
+    ViewFlipper viewFlipper;
+    @BindView(R.id.activity_account_query_tv_server_name)
+    TextView tvServer;
+    @BindView(R.id.activity_account_query_et_player_name)
+    EditText etName;
+    @BindView(R.id.activity_account_query_wb)
+    WebView webView;
 
-    private TextView tvServer;
-    private EditText etName;
     private Account account;
-    private WebView webView;
 
 //    private ListView lvServer;
     private LOLServerInfo listServer[];
     private int selectPosition;
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.activity_account_query_btn_next:
-                    onNext();
-                    break;
-                case R.id.activity_account_query_btn_confirm:
-                    onConfirm();
-                    break;
-                case R.id.activity_account_query_iv_back:
-                    AccountQueryActivity.this.finish();
-                    break;
-                case R.id.activity_account_query_layout_select_server:
-                    showServerListDialog();
-                    break;
-            }
-        }
-    };
+    @Override
+    protected void onClickBtnRight() {
+        onConfirm();
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_account_query);
+        setTitle("战绩查询");
+        setRightButtonStr("确认");
+        setRightButtonVisibility(View.GONE);
+        ButterKnife.bind(this);
         selectPosition = 0;
         queryServerList();
-        initView();
     }
 
     private void queryServerList() {
@@ -114,23 +107,8 @@ public class AccountQueryActivity extends AppCompatActivity {
         });
     }
 
-    private void initView() {
-        findViewById(R.id.activity_account_query_btn_next).setOnClickListener(onClickListener);
-        findViewById(R.id.activity_account_query_iv_back).setOnClickListener(onClickListener);
-        findViewById(R.id.activity_account_query_layout_select_server).setOnClickListener(onClickListener);
-
-        btnConfirm = (Button)findViewById(R.id.activity_account_query_btn_confirm);
-        btnConfirm.setOnClickListener(onClickListener);
-        btnConfirm.setVisibility(View.INVISIBLE);
-        viewFlipper = (ViewFlipper)findViewById(R.id.activity_account_query_vf);
-
-        tvServer = (TextView)findViewById(R.id.activity_account_query_tv_server_name);
-        etName = (EditText)findViewById(R.id.activity_account_query_et_player_name);
-        webView = (WebView)findViewById(R.id.activity_account_query_wb);
-    }
-
-    //点击下一步
-    private void onNext() {
+    @OnClick(R.id.activity_account_query_btn_next)
+    void onNext() {
         String name = etName.getText().toString().trim();
         String server = tvServer.getText().toString().trim();
         if(name.length() <= 0 || server.length() <= 0){
@@ -175,7 +153,8 @@ public class AccountQueryActivity extends AppCompatActivity {
     }
 
     //  点击弹出LOL服务器列表选择框
-    private void showServerListDialog() {
+    @OnClick(R.id.activity_account_query_layout_select_server)
+    void showServerListDialog() {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;    //得到宽度
@@ -233,7 +212,7 @@ public class AccountQueryActivity extends AppCompatActivity {
 
             setWebView();
             viewFlipper.showNext();
-            btnConfirm.setVisibility(View.VISIBLE);
+            setRightButtonVisibility(View.VISIBLE);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

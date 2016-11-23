@@ -13,7 +13,7 @@ import com.best.android.loler.R;
 import java.lang.Override;
 
 public class MainActivity_ViewBinding<T extends MainActivity> extends LoLBaseActivity_ViewBinding<T> {
-  private View view2131493063;
+  private View view2131493060;
 
   @UiThread
   public MainActivity_ViewBinding(final T target, View source) {
@@ -28,7 +28,7 @@ public class MainActivity_ViewBinding<T extends MainActivity> extends LoLBaseAct
     target.tvLevel = Utils.findRequiredViewAsType(source, R.id.left_menu_tv_level, "field 'tvLevel'", TextView.class);
     target.tvFightLevel = Utils.findRequiredViewAsType(source, R.id.left_menu_tv_fight_level, "field 'tvFightLevel'", TextView.class);
     view = Utils.findRequiredView(source, R.id.left_menu_layout_account_manager, "method 'onClickLeftMenuLayoutAccountManager'");
-    view2131493063 = view;
+    view2131493060 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -50,7 +50,7 @@ public class MainActivity_ViewBinding<T extends MainActivity> extends LoLBaseAct
     target.tvLevel = null;
     target.tvFightLevel = null;
 
-    view2131493063.setOnClickListener(null);
-    view2131493063 = null;
+    view2131493060.setOnClickListener(null);
+    view2131493060 = null;
   }
 }
