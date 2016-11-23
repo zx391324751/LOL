@@ -40,6 +40,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,12 +58,16 @@ public class HeroInfoActivity extends AppCompatActivity {
     private SkillInfo skillInfo[];
     private ImageView ivSkill[];
 
-    private SkillIndicatorLayout skillIndicatorLayout;
-
-    private TextView tvSkillName;
-    private TextView tvSkillCooldown;
-    private TextView tvSkillCost;
-    private TextView tvSkillDescription;
+    @BindView(R.id.activity_heroinfo_skill_indicator)
+    SkillIndicatorLayout skillIndicatorLayout;
+    @BindView(R.id.activity_heroinfo_tv_skill_name)
+    TextView tvSkillName;
+    @BindView(R.id.activity_heroinfo_tv_skill_cooldown)
+    TextView tvSkillCooldown;
+    @BindView(R.id.activity_heroinfo_tv_skill_cast)
+    TextView tvSkillCost;
+    @BindView(R.id.activity_heroinfo_tv_skill_description)
+    TextView tvSkillDescription;
 
     private List<LOLczInfo> listCzInfo;
     private ImageView ivPreCz[];
@@ -88,7 +94,7 @@ public class HeroInfoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heroinfo);
-
+        ButterKnife.bind(this);
         initView();
         initHeroInfo();
         initSkillPhoto();
@@ -149,19 +155,12 @@ public class HeroInfoActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        skillIndicatorLayout = (SkillIndicatorLayout)findViewById(R.id.activity_heroinfo_skill_indicator);
         skillIndicatorLayout.addOnSelectedChangedListener(new SkillIndicatorLayout.OnSelectedChangedListener() {
             @Override
             public void changed(int position) {
                 updataSkillText(position);
             }
         });
-
-        tvSkillName = (TextView)findViewById(R.id.activity_heroinfo_tv_skill_name);
-        tvSkillCost = (TextView)findViewById(R.id.activity_heroinfo_tv_skill_cast);
-        tvSkillCooldown = (TextView)findViewById(R.id.activity_heroinfo_tv_skill_cooldown);
-        tvSkillDescription = (TextView)findViewById(R.id.activity_heroinfo_tv_skill_description);
-
         findViewById(R.id.activity_heroinfo_layout_cz).setOnClickListener(onClickListener);
         initCzImageView();
     }
@@ -273,23 +272,6 @@ public class HeroInfoActivity extends AppCompatActivity {
         window.setAttributes(params);
     }
 
-    BaseHttpService.ResponseListener heroDetailListener = new BaseHttpService.ResponseListener() {
-        @Override
-        public void onProgress(int current, int total) {
-
-        }
-
-        @Override
-        public void onSuccess(String result) {
-            parseSkillJson(result);
-        }
-
-        @Override
-        public void onFail(String errorMsg) {
-            ToastUtil.showShortMsg(HeroInfoActivity.this, "数据加载失败");
-        }
-    };
-
     private void parseSkillJson(String result) {
         try {
             JSONObject jsonObject = new JSONObject(result);
@@ -320,23 +302,6 @@ public class HeroInfoActivity extends AppCompatActivity {
             tvSkillDescription.setText(skillInfo[position].description + "\n" + skillInfo[position].effect);
         }
     }
-
-    BaseHttpService.ResponseListener heroCzListener = new BaseHttpService.ResponseListener() {
-        @Override
-        public void onProgress(int current, int total) {
-
-        }
-
-        @Override
-        public void onSuccess(String result) {
-            parseCzInfoJson(result);
-        }
-
-        @Override
-        public void onFail(String errorMsg) {
-            ToastUtil.showShortMsg(HeroInfoActivity.this, "英雄出装信息加载失败");
-        }
-    };
 
     private void parseCzInfoJson(String result) {
         try {
