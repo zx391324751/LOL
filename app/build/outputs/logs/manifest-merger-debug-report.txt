@@ -129,6 +129,7 @@ MERGED from [com.zhy:percent-support-extends:1.0.1] D:\work\GithubWork\LOL\app\b
 MERGED from [com.android.support:appcompat-v7:22.2.0] D:\work\GithubWork\LOL\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:22.2.0] D:\work\GithubWork\LOL\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:22.2.0] D:\work\GithubWork\LOL\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\AndroidManifest.xml:20:5-43
+MERGED from [com.jakewharton:butterknife:8.4.0] D:\work\GithubWork\LOL\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.4.0\AndroidManifest.xml:5:5-43
 	android:targetSdkVersion
 		INJECTED from D:\work\GithubWork\LOL\app\src\main\AndroidManifest.xml
 		INJECTED from D:\work\GithubWork\LOL\app\src\main\AndroidManifest.xml

@@ -18,28 +18,38 @@ import android.widget.TextView;
 import com.best.android.loler.R;
 import com.best.android.loler.util.Helper;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * activity基类
  * 主要用于所有activity的共同元素的初始化，简化代码
  * 比如标题栏，状态栏，网络加载失败View等初始化
  * Created by user on 2016/11/16.
  */
-public abstract class LoLBaseActivity extends AppCompatActivity implements View.OnClickListener{
+public abstract class LoLBaseActivity extends AppCompatActivity{
 
-    private Toolbar toolbar;
-    private TextView tvTitle;
-    private ImageView ivLeft;
-    private Button btnRight;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.iv_left)
+    ImageView ivLeft;
+    @BindView(R.id.btn_right)
+    Button btnRight;
 
     private String title, btnRightStr;
     private int btnRightRes = -1, ivLeftRes = -1;
 
     protected abstract void initView(Bundle savedInstanceState);
 
+    @OnClick(R.id.iv_left)
     protected void onClickImageViewLeft(){
         this.finish();
     }
 
+    @OnClick(R.id.btn_right)
     protected void onClickBtnRight(){}
 
     protected void setRightButtonStr(String btnRightStr){
@@ -90,10 +100,7 @@ public abstract class LoLBaseActivity extends AppCompatActivity implements View.
     }
 
     private void initToolbar() {
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        tvTitle = (TextView)findViewById(R.id.tv_title);
-        ivLeft = (ImageView) findViewById(R.id.iv_left);
-        btnRight = (Button)findViewById(R.id.btn_right);
+        ButterKnife.bind(this);
         if(!TextUtils.isEmpty(title)){
             tvTitle.setText(title);
         }
@@ -108,21 +115,6 @@ public abstract class LoLBaseActivity extends AppCompatActivity implements View.
         }
         if(btnRightRes != -1){
             btnRight.setBackgroundResource(btnRightRes);
-        }
-
-        ivLeft.setOnClickListener(this);
-        btnRight.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_right:
-                onClickBtnRight();
-                break;
-            case R.id.iv_left:
-                onClickImageViewLeft();
-                break;
         }
     }
 

@@ -18,19 +18,29 @@ import com.best.android.loler.manager.PhotoManager;
 import com.best.android.loler.model.Account;
 import com.best.android.loler.util.FileUtil;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends LoLBaseActivity {
 
-    private  DrawerLayout drawerLayout;
-    private ViewPager viewPager;
+    @BindView(R.id.activity_main_drawerlayout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.activity_main_viewpager)
+    ViewPager viewPager;
     private final int INDICATOR_COUNT = 3;
     private Account account;
 
     //帐号数据
-    private ImageView ivPhoto;
-    private TextView tvName;
-    private TextView tvServerName;
-    private TextView tvLevel;
-    private TextView tvFightLevel;
+    @BindView(R.id.left_menu_iv_photo)
+    ImageView ivPhoto;
+    @BindView(R.id.left_menu_tv_name)
+    TextView tvName;
+    @BindView(R.id.left_menu_tv_server_name)
+    TextView tvServerName;
+    @BindView(R.id.left_menu_tv_level)
+    TextView tvLevel;
+    @BindView(R.id.left_menu_tv_fight_level)
+    TextView tvFightLevel;
 
     private View.OnClickListener leftMenuItemOnClickListener = new View.OnClickListener() {
         @Override
@@ -51,7 +61,7 @@ public class MainActivity extends LoLBaseActivity {
         setContentView(R.layout.activity_main);
         setRightButtonStr("直播");
         setIvLeftRes(R.drawable.icon_menu);
-
+        ButterKnife.bind(this);
         initView();
         initData();
     }
@@ -65,15 +75,7 @@ public class MainActivity extends LoLBaseActivity {
     }
 
     private void initView() {
-        viewPager = (ViewPager)findViewById(R.id.activity_main_viewpager);
-        drawerLayout = (DrawerLayout)findViewById(R.id.activity_main_drawerlayout);
         findViewById(R.id.left_menu_layout_account_manager).setOnClickListener(leftMenuItemOnClickListener);
-
-        ivPhoto = (ImageView)findViewById(R.id.left_menu_iv_photo);
-        tvServerName = (TextView) findViewById(R.id.left_menu_tv_server_name);
-        tvName = (TextView) findViewById(R.id.left_menu_tv_name);
-        tvLevel = (TextView) findViewById(R.id.left_menu_tv_level);
-        tvFightLevel = (TextView) findViewById(R.id.left_menu_tv_fight_level);
     }
 
     private void initData(){
