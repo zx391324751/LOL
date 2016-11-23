@@ -18,9 +18,9 @@ import java.lang.Override;
 public class LoLBaseActivity_ViewBinding<T extends LoLBaseActivity> implements Unbinder {
   protected T target;
 
-  private View view2131493094;
+  private View view2131493092;
 
-  private View view2131493096;
+  private View view2131493094;
 
   @UiThread
   public LoLBaseActivity_ViewBinding(final T target, View source) {
@@ -31,7 +31,7 @@ public class LoLBaseActivity_ViewBinding<T extends LoLBaseActivity> implements U
     target.tvTitle = Utils.findRequiredViewAsType(source, R.id.tv_title, "field 'tvTitle'", TextView.class);
     view = Utils.findRequiredView(source, R.id.iv_left, "field 'ivLeft' and method 'onClickImageViewLeft'");
     target.ivLeft = Utils.castView(view, R.id.iv_left, "field 'ivLeft'", ImageView.class);
-    view2131493094 = view;
+    view2131493092 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -40,7 +40,7 @@ public class LoLBaseActivity_ViewBinding<T extends LoLBaseActivity> implements U
     });
     view = Utils.findRequiredView(source, R.id.btn_right, "field 'btnRight' and method 'onClickBtnRight'");
     target.btnRight = Utils.castView(view, R.id.btn_right, "field 'btnRight'", Button.class);
-    view2131493096 = view;
+    view2131493094 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -60,10 +60,10 @@ public class LoLBaseActivity_ViewBinding<T extends LoLBaseActivity> implements U
     target.ivLeft = null;
     target.btnRight = null;
 
+    view2131493092.setOnClickListener(null);
+    view2131493092 = null;
     view2131493094.setOnClickListener(null);
     view2131493094 = null;
-    view2131493096.setOnClickListener(null);
-    view2131493096 = null;
 
     this.target = null;
   }

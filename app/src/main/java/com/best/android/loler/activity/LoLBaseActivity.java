@@ -64,6 +64,10 @@ public abstract class LoLBaseActivity extends AppCompatActivity{
         this.ivLeftRes = ivLeftRes;
     }
 
+    protected void setTitle(String title){
+        this.title = title;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

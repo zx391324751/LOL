@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +19,7 @@ import com.best.android.loler.util.FileUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends LoLBaseActivity {
 
@@ -42,27 +42,21 @@ public class MainActivity extends LoLBaseActivity {
     @BindView(R.id.left_menu_tv_fight_level)
     TextView tvFightLevel;
 
-    private View.OnClickListener leftMenuItemOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.left_menu_layout_account_manager:
-                    Intent intent = new Intent(MainActivity.this, AccountManagerActivity.class);
-                    startActivity(intent);
-                    drawerLayout.closeDrawer(Gravity.LEFT);
-                    break;
-            }
-        }
-    };
+    @OnClick(R.id.left_menu_layout_account_manager)
+    void onClickLeftMenuLayoutAccountManager(){
+        Intent intent = new Intent(MainActivity.this, AccountManagerActivity.class);
+        startActivity(intent);
+        drawerLayout.closeDrawer(Gravity.LEFT);
+    }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         FileUtil.initAllFileDir();
         setContentView(R.layout.activity_main);
+        setTitle("最强撸者");
         setRightButtonStr("直播");
         setIvLeftRes(R.drawable.icon_menu);
         ButterKnife.bind(this);
-        initView();
         initData();
     }
 
@@ -72,10 +66,6 @@ public class MainActivity extends LoLBaseActivity {
         AccountDao accountDao = new AccountDao();
         account = accountDao.getSelectedAccount();
         initAccountData();
-    }
-
-    private void initView() {
-        findViewById(R.id.left_menu_layout_account_manager).setOnClickListener(leftMenuItemOnClickListener);
     }
 
     private void initData(){

@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,44 +40,34 @@ import retrofit2.Retrofit;
 /**
  * Created by BL06249 on 2015/12/16.
  */
-public class AccountManagerActivity extends AppCompatActivity {
+public class AccountManagerActivity extends LoLBaseActivity {
 
     private static final int ADD_ACCOUNT_CODE = 1001;
 
-    private ListView lvAccount;
+    @BindView(R.id.activity_account_manager_lv_account)
+    ListView lvAccount;
     private List<Account> listAccount;
     private ListviewAccountAdapter accountAdapter;
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.activity_account_manager_iv_back:
-                    AccountManagerActivity.this.finish();
-                    break;
-                case R.id.activity_account_manager_btn_add:
-                    Intent intent = new Intent(AccountManagerActivity.this, AccountQueryActivity.class);
-                    startActivityForResult(intent, ADD_ACCOUNT_CODE);
-                    break;
-            }
-        }
-    };
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_manager);
+    protected void onClickBtnRight() {
+        Intent intent = new Intent(AccountManagerActivity.this, AccountQueryActivity.class);
+        startActivityForResult(intent, ADD_ACCOUNT_CODE);
+    }
 
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_account_manager);
+        setTitle("账户管理");
+        setRightButtonStr("添加");
+        ButterKnife.bind(this);
         initView();
         initData();
     }
 
+
     private void initView() {
-
-        findViewById(R.id.activity_account_manager_iv_back).setOnClickListener(onClickListener);
-        findViewById(R.id.activity_account_manager_btn_add).setOnClickListener(onClickListener);
-
-        lvAccount = (ListView)findViewById(R.id.activity_account_manager_lv_account);
         lvAccount.setOnItemClickListener(new OnAccountListViewItemClickListener());
     }
 
